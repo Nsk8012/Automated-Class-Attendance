@@ -1,74 +1,34 @@
 import os
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-driver = webdriver.Firefox(executable_path="C://geckodriver//geckodriver.exe")
+PATH = "C:\Program Files (x86)\chromedriver.exe"
+driver = webdriver.Chrome(PATH)
 driver.get("https://olympus.greatlearning.in/dashboard")
 
+emailBox = driver.find_element_by_xpath('//*[@id="login"]')
+passWord = driver.find_element_by_xpath('//*[@id="password"]')
+enterButton = driver.find_element_by_xpath('//*[@id="loginSubmitButton"]')
 
-def GL_loggin():
-    emailBox = driver.find_element_by_xpath('//*[@id="login"]')
-    passWord = driver.find_element_by_xpath('//*[@id="password"]')
-    enterButton = driver.find_element_by_xpath('//*[@id="loginSubmitButton"]')
-
-    emailBox.send_keys('nishanth818@gmail.com')
-    passWord.send_keys('Neya@8012')
-    enterButton.click()
+emailBox.send_keys('nishanth818@gmail.com')
+passWord.send_keys('Neya@8012')
+enterButton.click()
 
 
-def switchBox():
-    switchBox = driver.find_element_by_xpath(
-        '/html/body/div[3]/div[3]/div/div[3]/div/button[2]/span[1]')
-    switchBox.click()
-
-
-def secB():
-    secB_Box = driver.find_element_by_xpath(
-        "/html/body/div[3]/div[3]/ul/li[1]/p")
-    secB_Box.click()
-
-    switchBox = driver.find_element_by_xpath(
-        '/html/body/div[3]/div[3]/div/div[3]/div/button[2]/span[1]')
-    switchBox.click()
-
-    upcomingBox = driver.find_element_by_xpath(
-        '/html/body/div[1]/main/div/div/div/div[3]/div/div[1]/div[2]/div/button[1]')
-    upcomingBox.click()
-
-
-def secA():
-    secA_Box = driver.find_element_by_xpath(
-        "/html/body/div[3]/div[3]/ul/li[2]/p")
-    secA_Box.click()
-
-    switchBox = driver.find_element_by_xpath(
-        '/html/body/div[3]/div[3]/div/div[3]/div/button[2]/span[1]')
-    switchBox.click()
-
-    upcomingBox = driver.find_element_by_xpath(
-        '/html/body/div[1]/main/div/div/div/div[3]/div/div[1]/div[2]/div/button[1]')
-    upcomingBox.click()
-
-
-def secML():
-    secML_Box = driver.find_element_by_xpath(
-        "/html/body/div[3]/div[3]/ul/li[3]/p")
-    secML_Box.click()
-
-    switchBox = driver.find_element_by_xpath(
-        '/html/body/div[3]/div[3]/div/div[3]/div/button[2]/span[1]')
-    switchBox.click()
-
-    upcomingBox = driver.find_element_by_xpath(
-        '/html/body/div[1]/main/div/div/div/div[3]/div/div[1]/div[2]/div/button[1]')
-    upcomingBox.click()
-
-
-def CheckDashboard():
+try:
+    tripleButton = driver.find_element_by_xpath(
+        '//*[@id="root"]/header/div/div/button')
+    tripleButton.click()
     programBox = driver.find_element_by_xpath(
-        "/html/body/div[1]/header/div/div/div[2]/div/div/div")
+        '/html/body/div[2]/div[3]/div/div[2]/div/div/div')
     programBox.click()
-    secB()
+    sec_B = driver.find_element_by_xpath('//*[@id="menu-"]/div[3]/ul/li[1]')
+    sec_B.click()
 
+    switchButton = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.name, 'Switch Program')))
 
-GL_loggin()
-CheckDashboard()
+except:
+    print('Not opening')
